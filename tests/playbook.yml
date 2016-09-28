@@ -1,4 +1,4 @@
 ---
 - hosts: test
   roles:
-    - role: ../ansible-role-ubuntu-secure-gateway
+    - role: ../ansible-role-ubuntu-docker
