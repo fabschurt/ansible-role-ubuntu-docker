@@ -1,0 +1,57 @@
+---
+- name: Add Docker APT repository’s GPG key
+  apt_key:
+    id: 58118E89F3A912897C070ADBF76221572C52609D
+    keyserver: 'hkp://p80.pool.sks-keyservers.net:80'
+    state: present
+
+- name: Register Docker APT repository
+  copy:
+    src: etc/apt/sources.list.d/docker.list
+    dest: /etc/apt/sources.list.d/docker.list
+    mode: 0644
+
+- name: Get kernel version
+  shell: 'uname -r'
+  register: kernel_version
+  changed_when: false
+  failed_when: kernel_version.stdout == ''
+
+- name: Make sure the required packages are present on the system
+  apt:
+    name: '{{ item }}'
+    state: present
+    update_cache: true
+  with_items:
+    - 'linux-image-extra-{{ kernel_version.stdout }}'
+    - linux-image-extra-virtual
+    - apt-transport-https
+    - ca-certificates
+    - docker-engine
+
+- name: Check if pip is installed
+  stat:
+    path: /usr/local/bin/pip
+  register: pip_stat
+
+- name: Install the latest version of pip if needed
+  shell: 'curl -sS https://bootstrap.pypa.io/get-pip.py | python'
+  when: pip_stat.stat.exists == false
+
+- name: Install Docker Compose with pip # This will get the latest version of Compose
+  pip:
+    name: docker-compose
+    state: present
+
+- name: Install a fixed version of the docker-py Python package # We are forced to do this for now, due to a bug in the docker_service module (this is non-idempotent)
+  tags: [hotfix]
+  pip:
+    name: docker-py
+    version: '1.9.0'
+    state: present
+
+- name: Create a directory to store Docker application-specific stuff
+  file:
+    path: /etc/docker/config
+    state: directory
+    mode: 0755

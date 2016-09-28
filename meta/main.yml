@@ -1,0 +1,11 @@
+---
+galaxy_info:
+  author: Fabien Schurter
+  description: 'All you need to run Docker containers on your Ubuntu box.'
+  license: MIT
+  min_ansible_version: 2.1
+  platforms:
+    - name: Ubuntu
+      versions: [xenial]
+  galaxy_tags: [ubuntu, docker]
+dependencies: []
