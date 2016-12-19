@@ -64,8 +64,8 @@
     version: '1.9.0'
     state: present
 
-- name: Create a directory to store Docker application-specific stuff
+- name: Create a directory to store application stacks’ config
   file:
-    path: /etc/docker/config
+    path: '{{ ubuntu_docker_stack_path }}'
     state: directory
     mode: 0755
