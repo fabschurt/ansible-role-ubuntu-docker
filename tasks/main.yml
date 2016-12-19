@@ -68,4 +68,4 @@
   file:
     path: '{{ ubuntu_docker_stack_path }}'
     state: directory
-    mode: 0755
+    mode: 0700
