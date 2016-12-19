@@ -28,6 +28,7 @@
     - apt-transport-https
     - ca-certificates
     - docker-engine
+    - git
 
 - name: Check if pip is installed
   stat:
