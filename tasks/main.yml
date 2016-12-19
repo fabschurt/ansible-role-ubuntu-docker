@@ -28,6 +28,7 @@
     - apt-transport-https
     - ca-certificates
     - docker-engine
+    - curl
     - git
 
 - name: Check if pip is installed
@@ -38,6 +39,18 @@
 - name: Install the latest version of pip if needed
   shell: 'curl -sS https://bootstrap.pypa.io/get-pip.py | python'
   when: pip_stat.stat.exists == false
+
+- name: Check if docker-clean is installed
+  stat:
+    path: /usr/local/bin/docker-clean
+  register: dclean_stat
+
+- name: Install the latest version of docker-clean if needed
+  shell: |
+    curl -s https://raw.githubusercontent.com/ZZROTDesign/docker-clean/v2.0.4/docker-clean |
+    sudo tee /usr/local/bin/docker-clean > /dev/null && \
+    sudo chmod 0700 /usr/local/bin/docker-clean
+  when: dclean_stat.stat.exists == false
 
 - name: Install Docker Compose with pip # This will get the latest version of Compose
   pip:
