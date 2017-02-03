@@ -20,52 +20,28 @@
 - name: Make sure the required packages are present on the system
   apt:
     name: '{{ item }}'
-    state: present
+    state: latest
     update_cache: true
   with_items:
     - 'linux-image-extra-{{ kernel_version.stdout }}'
     - linux-image-extra-virtual
     - apt-transport-https
     - ca-certificates
-    - docker-engine
-    - curl
+    - software-properties-common
     - git
+    - python-pip
+    - docker-engine
 
-- name: Check if pip is installed
-  stat:
-    path: /usr/local/bin/pip
-  register: pip_stat
+- name: Update core Python packages
+  pip:
+    name: '{{ item }}'
+    state: latest
+  with_items:
+    - pip
+    - setuptools
 
-- name: Install the latest version of pip if needed
-  shell: 'curl -sS https://bootstrap.pypa.io/get-pip.py | python'
-  when: pip_stat.stat.exists == false
-
-- name: Check if docker-clean is installed
-  stat:
-    path: /usr/local/bin/docker-clean
-  register: dclean_stat
-
-- name: Install the latest version of docker-clean if needed
-  shell: |
-    curl -s https://raw.githubusercontent.com/ZZROTDesign/docker-clean/v2.0.4/docker-clean |
-    sudo tee /usr/local/bin/docker-clean > /dev/null && \
-    sudo chmod 0700 /usr/local/bin/docker-clean
-  when: dclean_stat.stat.exists == false
-
-- name: Install Docker Compose with pip # This will get the latest version of Compose
+- name: Install frozen version of Compose
   pip:
     name: docker-compose
+    version: '1.9.0' # Version has to be frozen due to a bug in docker_service version 1.10
     state: present
-
-- name: Install a fixed version of the docker-py Python package # We are forced to do this for now, due to a bug in the docker_service module (this is non-idempotent)
-  tags: [hotfix]
-  pip:
-    name: docker-py
-    version: '1.9.0'
-    state: present
-
-- name: Create a directory to store application stacks’ config
-  file:
-    path: '{{ ubuntu_docker_stack_path }}'
-    state: directory
-    mode: 0700
