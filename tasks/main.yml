@@ -43,5 +43,5 @@
 - name: Install frozen version of Compose
   pip:
     name: docker-compose
-    version: '1.9.0' # Version has to be frozen due to a bug in docker_service version 1.10
+    version: '1.9.0' # Version has to be frozen due to a bug in docker_service
     state: present
