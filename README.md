@@ -7,7 +7,8 @@ really fancy here, it just follows the instructions given in the official
 [installation documentation](https://docs.docker.com/engine/installation/linux/ubuntulinux/).
 It will also install the latest version of Docker Compose.
 
-Full compatibility has been tested on **Ubuntu 16.04** only.
+This role is targeted at **Ubuntu 16.04**, but I guess it should work on any
+recent Ubuntu flavor.
 
 ## Requirements
 
