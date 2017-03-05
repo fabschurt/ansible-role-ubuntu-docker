@@ -13,7 +13,7 @@ recent Ubuntu flavor.
 ## Requirements
 
 * Ubuntu remote host(s) with root access
-* Ansible >= 2.1
+* Ansible >= 2.0
 
 ## Example playbook
 
