@@ -1,29 +1,30 @@
-# Ubuntu Docker (16.04)
+# Ansible :: Ubuntu Docker
 
-[![Travis CI](https://img.shields.io/travis/fabschurt/ansible-role-ubuntu-docker.svg)](https://travis-ci.org/fabschurt/ansible-role-ubuntu-docker)
+[![Travis CI](https://img.shields.io/travis/fabschurt/ansible-role-ubuntu-docker/master.svg)](https://travis-ci.org/fabschurt/ansible-role-ubuntu-docker)
 
 This role will set your Ubuntu box up for running Docker containers. Nothing
 really fancy here, it just follows the instructions given in the official
 [installation documentation](https://docs.docker.com/engine/installation/linux/ubuntulinux/).
 It will also install the latest version of Docker Compose.
 
-This role is targeted at **Ubuntu 16.04**, but I guess it should work on any
-recent Ubuntu flavor.
+This role is targeted at **Ubuntu LTS 18.04**, but I guess it should work with
+any recent Ubuntu flavor.
 
 ## Requirements
 
-* Ubuntu remote host(s) with root access
-* Ansible >= 2.0
+* Ubuntu 18.04 remote host(s) with root access
+* Ansible >= 2.4
 
 ## Example playbook
 
-This is an example playbook that demonstrates how you would use the role, provided
-that you’ve [installed](https://galaxy.ansible.com/intro#download) it already&nbsp;:
+This is an example playbook that demonstrates how you would use the role,
+provided that you’ve [installed](https://galaxy.ansible.com/docs/using/installing.html)
+it already:
 
 ```yaml
-- hosts: servers
+- hosts: …
   roles:
-    - role: fabschurt.ubuntu-docker
+    - role: fabschurt.ubuntu_docker
 ```
 
 ## License
