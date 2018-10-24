@@ -1,11 +1,12 @@
 ---
 galaxy_info:
+  role_name: ubuntu_docker
   author: Fabien Schurter
-  description: 'All you need to run Docker containers on your Ubuntu box.'
+  description: Everything you need to run Docker on Ubuntu 18.04.
   license: MIT
-  min_ansible_version: 2.0
+  min_ansible_version: 2.4
   platforms:
     - name: Ubuntu
-      versions: [xenial]
-  galaxy_tags: [ubuntu, docker]
-dependencies: []
+      versions: [bionic]
+dependencies:
+  - fabschurt.ubuntu_base
