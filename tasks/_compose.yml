@@ -1,5 +1,0 @@
----
-- name: Update core Python packages and install Docker Compose
-  pip:
-    name: '{{ static.compose_packages }}'
-    state: latest

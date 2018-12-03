@@ -1,6 +1,24 @@
 ---
-- import_tasks: _docker.yml
-  tags: [docker]
+- name: Add Docker PPA key
+  apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    state: present
 
-- import_tasks: _compose.yml
-  tags: [compose]
+- name: Register Docker repository
+  apt_repository:
+    repo: 'deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release|lower }} stable'
+
+- name: Install Docker and its dependencies
+  apt:
+    name:
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - software-properties-common
+      - docker-ce
+    state: latest
+
+- name: Install Docker Compose
+  pip:
+    name: docker-compose
+    state: latest
