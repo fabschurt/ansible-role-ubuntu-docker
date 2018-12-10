@@ -7,9 +7,6 @@ really fancy here, it just follows the instructions given in the official
 [installation documentation](https://docs.docker.com/install/linux/docker-ee/ubuntu/).
 It will also install the latest version of Docker Compose.
 
-This role is targeted at **Ubuntu LTS 18.04**, but I guess it should work with
-any recent Ubuntu flavor.
-
 ## Requirements
 
 * Ubuntu 18.04 remote host(s) with root access
