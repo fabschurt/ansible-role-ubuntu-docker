@@ -1,4 +1,4 @@
-# Ansible :: Ubuntu Docker
+# Ansible Ubuntu Docker
 
 [![Travis CI](https://img.shields.io/travis/fabschurt/ansible-role-ubuntu-docker/master.svg)](https://travis-ci.org/fabschurt/ansible-role-ubuntu-docker)
 
